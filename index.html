@@ -1,0 +1,57 @@
+<!-- En un formulario bien formado en HTML debe haber un campo de entrada numerico y 
+    un boton.
+    Cuando se pulse sobre el boton
+     habra que comprobar que haya escrito un numero mayor o igual que 0
+     y menor o igual que 9. Si es 1 num entre 0 y 9,
+     se debe esperar 3 segundos y construir dentro de una etiqueta <table></table>,
+     la tabla de multiplicar de ese numero, cada resultado en una fila y cada número y 
+     cada signo * y = en una celda, en cada fila. Si no es 1 numero entre 0 y 9 
+     se mostrara un mensaje de error que habra junto al campo de entrada numérico.
+     Recuerda que sea un número entre 0 y 9 debes borrar el mensaje de error para que 
+     no se quede escrito siempre.
+
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            let boton = document.getElementById("boton");
+            let tr = "";
+            boton.addEventListener('click', evt => {
+                let numero = parseInt(document.getElementById("numero").value);
+                //parseamos la entra del formulario....y obtenemos su valor con .value
+                if (numero >= 0 && numero <= 9) { // si el numero ES mayor que 0 o menor o igual que el numero...
+                    setTimeout(() => { // a los tres segundos se pintaran las filas de la tabla que contienen la tabla de mutliplicar del numero de input
+                        for (let i = 0; i <= numero; i++) {
+                            tr += `<tr><td>${numero}</td><td>*</td><td>${i}</><td>=</td><td>${numero * i}</td></tr>`;
+                        }
+                        document.querySelector("table").innerHTML += tr;
+                        document.querySelector("p").textContent = "";
+                    }, 3000);
+                } else {
+                    document.querySelector("p").textContent = "ERROR";
+                    document.querySelector("table").innerHTML = "";
+                }
+            });
+
+        });
+    </script>
+</head>
+
+<body>
+    <form action="">
+        <input type="number" id="numero">
+        <p></p>
+        <button type="button" id="boton">Click</button>
+    </form>
+    <table></table>
+</body>
+
+</html>
